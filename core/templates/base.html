@@ -5,15 +5,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kaizen Devs!</title>
+    <meta name="theme-color" content="#fff9e8" />
+    <meta name="description" content="A friendly place for developers to share stories, advice, and lessons." />
+    <title>{% block title %}Kaizen Devs — grow together{% endblock %}</title>
 
     <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/kaizen.css' %}" rel="stylesheet" />
     <script src="{% static 'js/vendor/htmx.min.js' %}"></script>
     <script src="{% static 'js/vendor/htmx-ws.js' %}"></script>
 
     {% block scripts %} {% endblock %}
   </head>
-  <body>
+  <body class="site-shell">
     {% include 'navbar.html' %} {% block content %} {% endblock %}
   </body>
 </html>

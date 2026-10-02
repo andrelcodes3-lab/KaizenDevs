@@ -1,40 +1,18 @@
-<nav class="navbar bg-base-100">
-  <a class="btn btn-ghost text-xl">Kaizen Devs</a>
-
-  <a
-    href="{% url 'index' %}"
-    class="text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md"
-  >
-    Rooms
-  </a>
-
-  {% if user.is_authenticated %}
-  <!-- User is authenticated: Show Logout button -->
-  <a
-    href="{% url 'settings' %}"
-    class="text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md"
-  >
-    Settings
-  </a>
-  <a
-    href="{% url 'account_logout' %}"
-    class="text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md"
-  >
-    Logout
-  </a>
-  {% else %}
-  <!-- User is not authenticated: Show Login and Register links -->
-  <a
-    href="{% url 'account_login' %}"
-    class="text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md"
-  >
-    Login
-  </a>
-  <a
-    href="{% url 'account_signup' %}"
-    class="ml-4 text-gray-800 hover:bg-gray-100 px-4 py-2 rounded-md"
-  >
-    Register
-  </a>
-  {% endif %}
-</nav>
+<header class="topbar">
+  <nav class="nav-inner" aria-label="Main navigation">
+    <a class="brand" href="{% url 'index' %}" aria-label="Kaizen Devs home">
+      <span class="brand-mark" aria-hidden="true">K<span>✳</span></span>
+      <span>kaizen<span class="brand-accent">devs</span><small>BUILD EACH OTHER UP</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="{% url 'index' %}" class="nav-link">Rooms</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'settings' %}" class="nav-link">Settings</a>
+        <a href="{% url 'account_logout' %}" class="nav-action">Log out <span aria-hidden="true">↗</span></a>
+      {% else %}
+        <a href="{% url 'account_login' %}" class="nav-link">Log in</a>
+        <a href="{% url 'account_signup' %}" class="nav-action">Join the community <span aria-hidden="true">↗</span></a>
+      {% endif %}
+    </div>
+  </nav>
+</header>

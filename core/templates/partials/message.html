@@ -9,10 +9,7 @@
                         src="{{ message.user.profile_picture.url }}"
                     />
                 {% else %}
-                    <img
-                        alt="Tailwind CSS chat bubble component"
-                        src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
-                    />
+                    <span class="avatar-fallback" aria-label="Default profile">{{ message.user.username|first|upper }}</span>
                 {% endif %}
             </div>
         </div>
@@ -22,7 +19,7 @@
                 {{ message.created_at }}
             </time>
         </div>
-        <div class="chat-bubble chat-bubble-primary">
+        <div class="chat-bubble chat-bubble-primary message-bubble">
             {{ message.content }}
         </div>
         <div class="chat-footer opacity-50">Delivered</div>

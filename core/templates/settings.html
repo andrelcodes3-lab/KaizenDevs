@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
+{% block title %}Your settings — Kaizen Devs{% endblock %}
 
 {% block content %}
 
-<div class="flex justify-center items-center">
-    <div class="bg-white p-6 rounded-lg w-full lg:w-3/4">
-        <h1 class="text-4xl">User Settings</h1>
-
-        <p class="text-xl mt-4">Change your settings below</p>
-
+<main class="page-wrap settings-page">
+    <a href="{% url 'index' %}" class="back-link"><span aria-hidden="true">←</span> Back to rooms</a>
+    <section class="settings-card">
+        <span class="eyebrow">MAKE YOURSELF AT HOME</span>
+        <h1>Your profile</h1>
+        <p class="settings-intro">A little about you helps make this community feel more like a community.</p>
         {% include 'partials/settings-form.html' %}
-    </div>
-</div>
+    </section>
+</main>
 {% endblock %}

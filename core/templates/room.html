@@ -15,43 +15,44 @@
 </script>
 {% endblock %}
 
+{% block title %}{{ room.name }} — Kaizen Devs{% endblock %}
 {% block content %}
 
-<div class="text-center">
-
-    <h1 class="text-4xl">{{ room.name }}</h1>
-
-    <div class="flex flex-col mx-4 lg:w-[75%] lg:mx-auto">
-        <div id="chat-box" class="flex-1 overflow-y-auto mb-4 card bg-base-100 shadow-lg p-4">
+<main class="page-wrap chat-page">
+    <a href="{% url 'index' %}" class="back-link"><span aria-hidden="true">←</span> All rooms</a>
+    <div class="chat-heading"><div><span class="eyebrow"><span class="live-dot"></span> COMMUNITY ROOM</span><h1>{{ room.name }}</h1><p>Share what you’re learning. Someone’s glad you did.</p></div><span class="chat-heading-icon" aria-hidden="true">✳</span></div>
+    <div class="chat-layout">
+        <div id="chat-box" class="chat-box">
             
             {% for message in messages %}
                 {% include 'partials/message.html' %}
             
             {% empty %}
-                <p class="mt-4 text-xl" id="no-messages">There are currently no messages in this room!</p>
+                <div class="chat-empty" id="no-messages"><span aria-hidden="true">💬</span><strong>Be the first to say hello!</strong><p>Every good conversation starts somewhere.</p></div>
             {% endfor %}
         </div>
 
         <!-- Form to allow the user to add new messages -->
-        <form id="chat-form" class="sticky bottom-0 bg-base-100 shadow-xl p-4 rounded-t-xl border-t border-base-300"
+        <form id="chat-form" class="chat-composer"
             hx-ext="ws"
             ws-connect="/ws/chat/{{ room.slug }}/"
             ws-send
             hx-on::ws-after-send="this.reset()"
             hx-on::ws-after-message="let p = document.getElementById('no-messages'); 
             if (p) { p.remove() }">
-            <div class="flex gap-1">
+            <label class="composer-label" for="chat-message-input">YOUR MESSAGE</label>
+            <div class="composer-row">
                 <input type="text"
                     id="chat-message-input"
                     name="message"
                     minlength="2"
-                    class="input input-bordered flex-1"
-                    placeholder="Type your message..." />
-                <button type="submit" class="btn btn-primary">Send</button>
+                    class="chat-input"
+                    placeholder="Share a thought, a win, or a question…" />
+                <button type="submit" class="send-button">Send <span aria-hidden="true">↑</span></button>
             </div>
         </form>
     </div>
 
-</div>
+</main>
 
 {% endblock %}

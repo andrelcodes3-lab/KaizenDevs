@@ -1,25 +1,41 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block title %}Kaizen Devs — grow together{% endblock %}
+{% block content %}
+<main class="page-wrap home-page">
+  <section class="hero-panel">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="live-dot"></span> YOUR PEOPLE. YOUR NEXT BIG IDEA.</span>
+      <h1>Better developers,<br />built <span>together.</span></h1>
+      <p>Pull up a chair. Swap a story, untangle a tricky bug, or pass on something you wish you’d known sooner.</p>
+      <a class="hero-link" href="#rooms">Find your room <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <span class="art-spark spark-one">✳</span><span class="art-spark spark-two">✦</span>
+      <div class="speech-card speech-blue"><span>💡</span><b>tiny tip, big impact</b></div>
+      <div class="speech-card speech-yellow"><span>👋</span><b>hey, welcome in!</b></div>
+      <div class="hero-sticker">GROW<br />TOGETHER</div>
+    </div>
+    <div class="hero-scribble" aria-hidden="true">✳</div>
+  </section>
 
-<div class="flex justify-center items-center">
-  <div class="bg-white p-6 rounded-lg w-full lg:w-3/4">
-    <h1 class="text-4xl">Jokes, stories, lessons for Developers</h1>
-
-    <p class="text-xl mt-4">Available chat rooms</p>
-
-    <ul class="mt-2">
+  <section class="rooms-section" id="rooms">
+    <div class="section-heading">
+      <div><span class="eyebrow">FIND YOUR CORNER</span><h2>Good things happen in rooms.</h2></div>
+      <span class="room-count">{{ rooms|length }} room{{ rooms|length|pluralize }}</span>
+    </div>
+    <div class="room-grid">
       {% for room in rooms %}
-      <li>
-        <a
-          href="{% url 'room' room.slug %}"
-          class="text-primary hover:text-primary-focus underline text-lg"
-        >
-          {{ room.name }}
-        </a>
-      </li>
+      <a class="room-card room-card-{{ forloop.counter0|divisibleby:3|yesno:'blue,yellow' }}" href="{% url 'room' room.slug %}">
+        <span class="room-icon" aria-hidden="true">{% cycle '✳' '☀' '↗' '✦' %}</span>
+        <span class="room-card-copy"><strong>{{ room.name }}</strong><small>Jump in and join the conversation</small></span>
+        <span class="room-arrow" aria-hidden="true">↗</span>
+      </a>
       {% empty %}
-      <p>There are no rooms available.</p>
+      <div class="empty-rooms"><span aria-hidden="true">🌱</span><div><strong>It’s quiet in here… for now.</strong><p>Rooms will show up here when they’re ready.</p></div></div>
       {% endfor %}
-    </ul>
-  </div>
-</div>
+    </div>
+  </section>
+  <footer class="site-footer"><span>Small steps. Shared wins. <b>That’s Kaizen.</b></span><span>MADE FOR DEVS, BY DEVS <span aria-hidden="true">✳</span></span></footer>
+</main>
 {% endblock %}
